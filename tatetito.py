@@ -134,5 +134,13 @@ class state():
 
 
    def draw(self):
-       pass 
+       
+	color_dict = {True: 'red', False: 'green', None: 'white'}
+        
+        for row in range(6):
+            for col in range(7):
+                pylab.plot(col, row, '.', markersize=30, color=color_dict[self.tablero[row,col]])
+        pylab.xlim([-0.5, 6.5])
+        pylab.ylim([-0.5, 5.5])
+
                                  
