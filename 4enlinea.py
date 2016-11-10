@@ -7,7 +7,7 @@ import pylab
 """ Clase que implementa un gridWorld"""
 class gridWorld():
     def __init__(self, width=3, height=2, goals=None, positive=100, \
-                 select_action='random', alpha=0.01, gamma=0.9):
+                 select_action='random', alpha=0.001, gamma=0.9):
         """Seteo los parametros"""
 	self.height = height
 	self.width = width
@@ -116,7 +116,7 @@ class gridWorld():
             new_actions_Q = [[action, self.Q[n_row][n_col][action]] for action in new_actions]
             new_action_best = max(new_actions_Q, key = lambda x: x[1])[0]
 
-            self.Q[row][col][action_best] += self.alpha*(self.reward(state, action_best) + self.gamma * self.Q[n_row][n_col][new_action_best] - self.Q[row][col][action_best])
+            self.Q[row][col][action_best] += self.alpha*(self.reward(state, action_best) + self.gamma * (self.Q[n_row][n_col][new_action_best] - self.Q[row][col][action_best]))
 	
             # 4) Actualizo s
 	    state = new_state
@@ -171,9 +171,9 @@ if __name__ == "__main__":
      random.seed(123458)
 		
      # Ejemplo de gridWorld  de 2x3 
-     gw = gridWorld(height = 2, width = 3, goals=[ [1,2] ])
+     gw = gridWorld(height = 4, width = 4, goals=[ [1,2] ])
 
-     for i in range(1000):
+     for i in range(10000):
   	 start_state = [random.randint(0, gw.height-1), random.randint(0, gw.width-1)]
          gw.learn(start_state)
 
