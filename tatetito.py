@@ -6,8 +6,9 @@ import pylab
 from copy import deepcopy
 
         
-class state(): 
-    def __init__(self):
+class Tatetito(object): 
+
+    def __init__(self, width = 7, height = 6):
         self.tablero = np.array([[True,False,True,True,False,None,None],
                                   [True,True,False,None,None,None,None],
                                   [False,None,None,None,None,None,None],
@@ -15,10 +16,19 @@ class state():
                                   [None,None,None,None,None,None,None],
                                   [None,None,None,None,None,None,None]])    
 
-        # Diccionario de diccionarios
-        self.Q = {}
-        # Falta ver bien como inicializarlo
- 
+        # Q ya bien inicializado
+        self.Q = defaultdict(lambda: defaultdict(lambda: random.random()))
+        self.height = height
+        self.width = width
+
+        # Posicion inicial, creo q es lo que vamos a poner al final
+        # self.tablero = np.array([[None] * width] * height)
+
+        # Temperaturas 
+        self.temp1 = 1.00
+        self.temp2 = 1.00
+
+        self.learning_step = 0
     
     def aString(self):
         row,col = self.tablero.shape
@@ -29,7 +39,6 @@ class state():
                 if self.tablero[r,c]== False: res =res + "2"
                 if self.tablero[r,c]== None: res =res + "0"    
         return res
-
 
     def cuatro(self,lista):
         last=None
@@ -54,32 +63,40 @@ class state():
         if c+3<=col and r-3 <=0: res = res or self.cuatro(rot90(self.tablero[r-3:r+1,c:c+3+1]).diagonal())
         return res        
         
-    def isTerminal(self,r,c):
+
+    # VER BIEN ESTO, VER COMO ENTRA EN EL METODO learn !!!
+    def isTerminal(self, r, c):
+
+        # CALCULAR ACA r y c, creo que hay que pasarle como el ultimo move
+
         if self.cuatroEnLinea(r,c) :
             return True
+        # Si el tablero esta lleno, devuelve que es terminal
+        elif None not in self.tablero:
+            return True
+
         else:
             return False
+        
 
-    """ Player es True o False, segun quien juegue """
-    def accionesPosibles(self, player):
+    def accionesPosibles(self):
 
         res = list([])
         row,col = self.tablero.shape
         for c in range(col):
             for r in range(row):
-                if self.tablero[r,c]== None: res.append([player,r,c]); break
+                if self.tablero[r,c]== None: res.append(r,c]); break
         return res
 
     """ Actualiza sobre el tablero la accion realizada """
-    def move(self, action):
+    def move(self, action, player):
 
-        tablero_aux = deepcopy(self.tablero)
+        row, col = action
+        self.tablero[row][col] = player
 
-        row, col = action[1,2]
-        tablero_aux[row][col] = action[0]
 
-        return tablero_aux
-
+    # FALTA VER ESTA FUNCION, CREO QUE HAY QUE PASARLE PLAYER, 
+    # Y QUE NO DE RECOMPENSA SI ES EMPATE!!!
     """ Funcion recompensa, tengo una reward positiva si desde state
     usando action llego a un estado terminal """
     def reward(self, state, action):
@@ -89,45 +106,58 @@ class state():
         else:
             return 0
             
-    def learn(self, state):
+    def learn(self):
 
         self.learning_step += 1
 
         player = True
 
+        state = self.aString()
+
         # Repito hasta que state sea terminal
-        while self.isTerminal(state) == False:
+        # VER ACA, QUE ES LO QUE LE PASAMOS COMO STATE!!!!!
+        while self.isTerminal(...) == False:
+
+            # Esta es la key
+            state = self.aString()
 
             # 1) Listo las posibles acciones que puedo hacer teniendo
-                # en cuenta el estado de donde estoy
-            actions = self.possibleActions(state, player)
+                # en cuenta el estado de donde estoy, cargado en la matriz
+            actions = self.accionesPosibles()
 
             # LO MAS IMPORTANTE A CAMBIAR ESTA AQUI
             # 2) Elijo la accion con a con algun criterio, en principio al azar
 	    # Aca discriminamos que jugador juega con temperatura alta o baja
             if player == True:
-            # Aca ponemos la temperatura del player True
-            action_best = random.choice(actions)
-            else player == False:
-            # Aca ponemos la temperatura del player False
-            action_best = random.choice(actions)
+                 # Aca ponemos la temperatura del player True
+                 if random() < self.temp1:
+                      action_best = random.choice(actions)
+                 else:
+                      actions_Q = [[action, self.Q[state][action]] for action in new_actions]
+                      action_best = max(actions_Q, key = lambda x: x[1])[0]
+            
+            if player == False:
+                 # Aca ponemos la temperatura del player False
+                 if random() < self.temp2:
+                      action_best = random.choice(actions)
+                 else:
+                      actions_Q = [[action, self.Q[state][action]] for action in new_actions]
+                      action_best = max(actions_Q, key = lambda x: x[1])[0]
 
 
             # 3) Calculo el nuevo valor de Q(s,a)
-            new_state = self.move(action_best)
+            # OJO: aca ya cambia el tablero
+            self.move(action_best, player)
+            new_state = aString()
             
-            new_actions = self.possibleActions(new_state)
+            new_actions = self.accionesPosibles()
 
             new_actions_Q = [[action, self.Q[new_state][action]] for action in new_actions]
             new_action_best = max(new_actions_Q, key = lambda x: x[1])[0]
 
-            # Antes de pasar state a Q, convertirlo a string con el metodo definido
-
-            # Aca hay que revisar si el - de gamma esta bien
-            self.Q[state][action_best] += self.alpha*(self.reward(state, action_best) - self.gamma * (self.Q[new_state][new_action_best] - self.Q[state][action_best]))
-
-            # 4) Actualizo s
-            state = new_state
+            # Aca hay que revisar conceptualmente si el - de gamma esta bien
+            self.Q[state][action_best] += self.alpha*(self.reward(state, action_best)\
+                    - self.gamma * (self.Q[new_state][new_action_best] - self.Q[state][action_best]))
 
             # Cambia el jugador
             player = not player
