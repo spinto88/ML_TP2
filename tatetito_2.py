@@ -36,29 +36,49 @@ class Tatetito(object):
     
     def cuatro(self, lista):
 
-        last = 0
-        count = 0
-        res = False
-        for i in range(len(lista)): 
-            if lista[i] == 0: count = 0; last = 0
-            if lista[i] == 1 and last != 1: count = 1; last = 1
-            if lista[i] == 1 and last == 1: count += 1
-            if lista[i] == 2 and last != 2: count = 1; last = 2
-            if lista[i] == 2 and last == 2: count += 1
-            if count == 4: 
-                res = True
-                break
+        lista_str = ''
+        for i in lista:
+            lista_str += str(i)
         
-        return res
-    
+        if '1111' in lista_str or '2222' in lista_str:
+            return True
+        else:
+            return False
+
     
     def cuatroEnLinea(self,r,c):
 
         res = False
         res = res or self.cuatro(self.tablero[r,:])
         res = res or self.cuatro(self.tablero[:,c])
-        #if c-3 <= 0 and r-3 <= 0: res = res or self.cuatro(self.tablero[r-3:r+1,c-3:c+1].diagonal())
-        #if c+3 <= self.width and r-3 <= 0: res = res or self.cuatro(np.rot90(self.tablero[r-3:r+1,c:c+3+1]).diagonal())
+        
+        #diag1 = [self.tablero[i,j] for i in range(self.height) for j in [k in range(c-3, c+3) if k >= 0 and k < self.width]]  (SEBA PINTO)
+        #diag2 = [self.tablero[i,j] for i in range(self.height) for j in [k in range(c-3, c+3).reverse if k >= 0 and k < self.width]]
+        
+        diag1 = []
+        i = 0
+        while r-i >= 0 and c-i >= 0:
+            diag1.append(self.tablero[r-i,c-i])
+            i += 1
+        diag1.reverse()
+        i = 1
+        while r+i < self.height and c+i < self.width:
+            diag1.append(self.tablero[r+i,c+i])
+            i += 1
+
+        diag2 = []
+        i = 0
+        while r-i >= 0 and c+i < self.width:
+            diag2.append(self.tablero[r-i,c+i])            
+            i += 1
+        diag2.reverse()        
+        i = 1
+        while r+i < self.height and c-i >= 0:
+            diag2.append(self.tablero[r+i,c-i])
+            i += 1
+            
+        res = res or self.cuatro(diag1)
+        res = res or self.cuatro(diag2)
         return res
         
 
@@ -69,14 +89,12 @@ class Tatetito(object):
             if self.tablero[r,c] == 0:
                 r = r - 1
                 break
-            else:
-                r = self.height - 1
-                break
+        
         # Devuelve 2 si hay cuatro en linea y 1 si el tablero esta lleno
         if self.cuatroEnLinea(r,c):
             return "4EnLinea"
         # Si el tablero esta lleno, devuelve que es terminal
-        if 0 not in self.tablero:
+        elif 0 not in self.tablero:
             return "Lleno"
         else:
             return "Falso"
@@ -121,17 +139,18 @@ class Tatetito(object):
         return res
     
         
-    def learn(self):
+    def learn(self, steps = np.inf):
 
         # Inicializo
         player = 1
         action_best = np.random.randint(self.width)
-        
+        step = 0
         # Repito hasta que state sea terminal
         # VER ACA, QUE ES LO QUE LE PASAMOS COMO STATE!!!!!
-        while self.isTerminal(action_best) == "Falso":
+        while self.isTerminal(action_best) == "Falso" and step < steps:
 
             self.learning_step += 1
+            step += 1
             state = self.aString()
 
             # 1) Listo las posibles acciones que puedo hacer teniendo
@@ -157,8 +176,7 @@ class Tatetito(object):
             # OJO: aca ya cambia el tablero
             self.move(action_best, player)
 
-            pylab.figure()
-            self.draw()
+
 
 
             new_state = self.aString()
@@ -179,7 +197,10 @@ class Tatetito(object):
             except ValueError:
                 pass
             
-            
+        #pylab.figure()
+        #self.draw()
+        
+        
     def draw(self):        
         color_dict = {0: 'white', 1: 'red', 2: 'green'}
         
@@ -189,9 +210,12 @@ class Tatetito(object):
         pylab.xlim([-0.5, self.width-1 + 0.5])
         pylab.ylim([-0.5, self.height-1 + 0.5])
 
-
+#random.seed(123459)
 seba_pinto = Tatetito()
-seba_pinto.learn()
-#print seba_pinto.tablero
-#print seba_pinto.Q
-seba_pinto.draw()
+for _ in range(100000):
+    seba_pinto.learn()
+
+
+
+
+# Jugar
