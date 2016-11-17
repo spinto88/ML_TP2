@@ -21,8 +21,6 @@ class Tatetito(object):
         self.height = height
         self.width = width
 
-        # Posicion inicial, creo q es lo que vamos a poner al final
-        # self.tablero = np.array([[None] * width] * height)
 
         # Temperaturas 
         self.temp1 = 1.00
