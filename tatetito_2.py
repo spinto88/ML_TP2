@@ -145,6 +145,7 @@ class Tatetito(object):
         player = 1
         action_best = np.random.randint(self.width)
         step = 0
+        self.tablero = np.zeros([self.height, self.width], dtype = np.int16)
         # Repito hasta que state sea terminal
         # VER ACA, QUE ES LO QUE LE PASAMOS COMO STATE!!!!!
         while self.isTerminal(action_best) == "Falso" and step < steps:
@@ -212,8 +213,16 @@ class Tatetito(object):
 
 #random.seed(123459)
 seba_pinto = Tatetito()
-for _ in range(100000):
+for _ in range(10000):
     seba_pinto.learn()
+
+seba_pinto.learn()
+pylab.figure()
+seba_pinto.draw()
+
+pylab.close()
+
+
 
 
 
