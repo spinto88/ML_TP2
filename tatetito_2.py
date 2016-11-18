@@ -2,7 +2,7 @@ import numpy as np
 import random
 from collections import defaultdict
 import pylab
-
+import dill
         
 class Tatetito(object):
 
@@ -212,8 +212,12 @@ class Tatetito(object):
 
 #random.seed(123459)
 seba_pinto = Tatetito()
-for _ in range(100000):
+for _ in range(10000):
     seba_pinto.learn()
+
+# Guardo el objeto entero
+dill.dump(seba_pinto, file('Modelo_entrenado.pk','w'))
+# Se carga con dill.load(file('Modelo_entrenado'))
 
 
 
