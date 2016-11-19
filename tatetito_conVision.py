@@ -4,6 +4,8 @@ from collections import defaultdict
 import pylab
 #import cPickle as pk
 import dill
+#import os
+#os.chdir('/home/landfried/gaming/materias/aprendizaje_automatico/ML_TP2')
 
         
 class Tatetito(object):
@@ -221,23 +223,6 @@ class Tatetito(object):
                 pylab.plot(col, row, '.', markersize=30, color=color_dict[self.tablero[row,col]])
         pylab.xlim([-0.5, self.width-1 + 0.5])
         pylab.ylim([-0.5, self.height-1 + 0.5])
-
-#random.seed(123459)
-
-mundo = Tatetito(premio=1000)
-
-timesLearn = 10
-halflife = (timesLearn)/2
-disipacion=0.01
-b0=-halflife*disipacion
-
-for t in range(timesLearn):
-    temp = (1/(1+np.e**(-(b0+disipacion*(timesLearn-t ) ) ) ))
-    mundo.learn(temp1=temp,temp2=temp)
-				
-#pylab.figure()
-#mundo.draw()
-dill.dump(mundo, file('Modelo_entrenado.pk','w'))
 
 
 
