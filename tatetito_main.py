@@ -11,12 +11,18 @@ import dill
 
 mundo = tttt.Tatetito(premio=1000)
 d = datetime.now()
-while d.day <= 21 and d.hour <= 9:
+while d.day <= 20:
 	d = datetime.now()
 	mundo.learn()				
 dill.dump(mundo, file('Modelo_entrenado.pk','w'))
-
-
+while d.day <= 21:
+	d = datetime.now()
+	mundo.learn()				
+dill.dump(mundo, file('Modelo_entrenado.pk','w'))
+while d.day <= 22:
+	d = datetime.now()
+	mundo.learn()				
+dill.dump(mundo, file('Modelo_entrenado.pk','w'))
 
 
 
