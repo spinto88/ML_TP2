@@ -3,7 +3,7 @@ import random
 from collections import defaultdict
 import pylab
 #import cPickle as pk
-
+import dill
 
         
 class Tatetito(object):
@@ -234,6 +234,10 @@ b0=-halflife*disipacion
 for t in range(timesLearn):
     temp = (1/(1+np.e**(-(b0+disipacion*(timesLearn-t ) ) ) ))
     mundo.learn(temp1=temp,temp2=temp)
+				
+#pylab.figure()
+#mundo.draw()
+dill.dump(mundo, file('Modelo_entrenado.pk','w'))
 
 
 
