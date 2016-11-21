@@ -23,19 +23,18 @@ b0=-halflife*disipacion
 
 
 d = datetime.now()
-while d.day < 23:
-	d = datetime.now()
-	t = d.hour*d.minute
-	temp = 0.1+((1-0.1)/(1+np.e**(-(b0+disipacion*(timesLearn-t ) ) ) ))
-	mundo.learn(temp1=temp, temp2=temp)				
-dill.dump(mundo, file('Modelo_entrenado_23dia_00hs.pk','w'))
 while d.day < 22:
 	d = datetime.now()
 	t= d.hour*d.minute
 	temp = 0.1+((1-0.1)/(1+np.e**(-(b0+disipacion*(timesLearn-t ) ) ) ))
 	mundo.learn(temp1=temp, temp2=temp)				
 dill.dump(mundo, file('Modelo_entrenado_22dia_00hs.pk','w'))
-
+while d.day < 23:
+	d = datetime.now()
+	t = d.hour*d.minute
+	temp = 0.1+((1-0.1)/(1+np.e**(-(b0+disipacion*(timesLearn-t ) ) ) ))
+	mundo.learn(temp1=temp, temp2=temp)				
+dill.dump(mundo, file('Modelo_entrenado_23dia_00hs.pk','w'))
 
 
 
