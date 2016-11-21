@@ -2,11 +2,13 @@ import numpy as np
 import random
 from collections import defaultdict
 import pylab
+import matplotlib.pyplot as plt
 
         
 class Tatetito(object):
 
-    def __init__(self, width = 7, height = 6, alpha = 0.01, gamma = 0.9, temp1 = 10.0, temp2 = 10.0):
+    def __init__(self, width = 7, height = 6, alpha = 0.01, gamma = 0.9, \
+                 temp1 = 100.0, temp2 = 100.0, epsilon1 = 1.00, epsilon2 = 1.00):
 
         self.width = width
         self.height = height
@@ -18,9 +20,17 @@ class Tatetito(object):
         self.alpha = alpha
         self.gamma = gamma
 
-        # Temperaturas: 1.00 es temperatura infinita
+        # Estrategias 
+        self.strategy1 = 'random'
+        self.strategy2 = 'random'
+
+        # Temperaturas: 10.00 es temperatura alta, 0.01 es bien baja.
         self.temp1 = temp1
         self.temp2 = temp2
+
+        # Epsilon de e-greedy
+        self.epsilon1 = epsilon1
+        self.epsilon2 = epsilon2
         
         self.learning_step = 0
     
@@ -40,8 +50,10 @@ class Tatetito(object):
         for i in lista:
             lista_str += str(i)
         
-        if '1111' in lista_str or '2222' in lista_str:
-            return True
+        if '1111' in lista_str:
+            return 1
+        elif '2222' in lista_str:
+            return 2
         else:
             return False
 
@@ -89,7 +101,7 @@ class Tatetito(object):
         
         # Devuelve 2 si hay cuatro en linea y 1 si el tablero esta lleno
         if self.cuatroEnLinea(r,c):
-            return "4EnLinea"
+            return self.cuatroEnLinea(r,c)
         # Si el tablero esta lleno, devuelve que es terminal
         elif 0 not in self.tablero:
             return "Lleno"
@@ -123,7 +135,7 @@ class Tatetito(object):
     def reward(self, action, player):
         
         self.move(action, player)
-        if self.isTerminal(action) == "4EnLinea":
+        if self.isTerminal(action) == 1 or self.isTerminal(action) == 2:
             res = 100
         else:
             res = 0
@@ -139,7 +151,7 @@ class Tatetito(object):
     def learn(self, steps = np.inf):
 
         # Inicializo
-        player = 1
+	player = random.choice([1,2])
         action_best = np.random.randint(self.width)
         step = 0
         self.tablero = np.zeros([self.height, self.width], dtype = np.int16)
@@ -155,20 +167,59 @@ class Tatetito(object):
                 # en cuenta el estado de donde estoy, cargado en la matriz
             actions = self.accionesPosibles()
 
-            # LO MAS IMPORTANTE A CAMBIAR ESTA AQUI
             # 2) Elijo la accion con a con algun criterio, en principio al azar
 	       # Aca discriminamos que jugador juega con temperatura alta o baja
-            if player == 1:
-                temp = self.temp1
-            else:
-                temp = self.temp2
 
-            p_actions = [np.exp(self.Q[state][action]/temp) for action in actions]
-	    p_actions = p_actions / np.sum(p_actions)
+            # Jugador 1
+            if player == 1:
+                if self.strategy1 == 'random':
+                    action_best = np.random.choice(actions)
+                elif self.strategy1 == 'e-greedy':
+	            if random.random() < self.epsilon1:
+                        action_best = np.random.choice(actions)
+	            else:
+                        actions_Q = [[action, self.Q[state][action]] for action in actions]                
+                        action_best = max(actions_Q, key = lambda x: x[1])[0] 
+                elif self.strategy1 == 'softmax':
+                    temp = self.temp1
+                    p_actions = [np.exp(self.Q[state][action]/temp) for action in actions]
             
-            action_best = np.random.choice(actions, p = p_actions)
+                    if np.sum(p_actions) == 0.00:
+                        action_best = np.random.choice(actions)
+                    else:
+                        p_actions_norm = p_actions / np.sum(p_actions)                                  
+                        try:
+                            action_best = np.random.choice(actions, p = p_actions_norm)
+                        except:
+                            actions_Q = [[action, self.Q[state][action]] for action in actions]                
+                            action_best = max(actions_Q, key = lambda x: x[1])[0]
+            # Jugador 2
+            if player == 2:
+                if self.strategy2 == 'random':
+                    action_best = np.random.choice(actions)
+                elif self.strategy2 == 'e-greedy':
+	            if random.random() < self.epsilon2:
+                        action_best = np.random.choice(actions)
+	            else:
+                        actions_Q = [[action, self.Q[state][action]] for action in actions]                
+                        action_best = max(actions_Q, key = lambda x: x[1])[0] 
+                elif self.strategy2 == 'softmax':
+                    temp = self.temp2
+                    p_actions = [np.exp(self.Q[state][action]/temp) for action in actions]
             
+                    if np.sum(p_actions) == 0.00:
+                        action_best = np.random.choice(actions)
+                    else:
+                        p_actions_norm = p_actions / np.sum(p_actions)                                  
+                        try:
+                            action_best = np.random.choice(actions, p = p_actions_norm)
+                        except:
+                            actions_Q = [[action, self.Q[state][action]] for action in actions]                
+                            action_best = max(actions_Q, key = lambda x: x[1])[0]
+
+ 
             recompensa = self.reward(action_best, player)
+            
             # 3) Calculo el nuevo valor de Q(s,a)
             # OJO: aca ya cambia el tablero
             self.move(action_best, player)
@@ -183,7 +234,7 @@ class Tatetito(object):
 
                 # Aca hay que revisar conceptualmente si el - de gamma esta bien
                 self.Q[state][action_best] += self.alpha*(recompensa - self.gamma * (
-                    self.Q[new_state][new_action_best] - self.Q[state][action_best]))
+                    self.Q[new_state][new_action_best] + self.Q[state][action_best]))
     
                 # Cambia el jugador
                 if player == 1: player = 2
@@ -191,8 +242,7 @@ class Tatetito(object):
             except ValueError:
                 pass
             
-        #pylab.figure()
-        #self.draw()
+        return self.isTerminal(action_best)
         
         
     def draw(self):        
@@ -203,21 +253,54 @@ class Tatetito(object):
                 pylab.plot(col, row, '.', markersize=30, color=color_dict[self.tablero[row,col]])
         pylab.xlim([-0.5, self.width-1 + 0.5])
         pylab.ylim([-0.5, self.height-1 + 0.5])
+        pylab.show()
 
-random.seed(123459)
+
+
+# Los dos random
+random.seed(123457)
 seba_pinto = Tatetito()
-for _ in range(10000):
-    seba_pinto.learn()
-
-seba_pinto.learn()
-pylab.figure()
-seba_pinto.draw()
-
-pylab.close()
+winners = []
+for k in range(10000):
+    winners.append(seba_pinto.learn())
 
 
+# El jugador 2 con e-greedy
+random.seed(123457)
+seba_pinto = Tatetito()
+winners = []
+seba_pinto.strategy2 = 'e-greedy'
+seba_pinto.epsilon2 = 0.25
+for k in range(10000):
+    winners.append(seba_pinto.learn())
 
 
 
 
-# Jugar
+
+
+
+
+# Cuento las victorias
+victorias1 = []
+acum = 0
+for i in winners:
+    if i == 1:
+        acum += 1
+    victorias1.append(acum)
+
+victorias2 = []
+acum = 0
+for i in winners:
+    if i == 2:
+        acum += 1
+    victorias2.append(acum)
+
+
+plt.plot(victorias1, label = 'Jugador 1')
+plt.plot(victorias2, label = 'Jugador 2')
+plt.xlabel('Juegos')
+plt.ylabel('Victorias acumuladas')
+plt.legend(loc = 'best')
+plt.grid('on')
+plt.show()
