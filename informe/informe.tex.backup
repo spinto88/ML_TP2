@@ -1,0 +1,125 @@
+\documentclass[11pt, spanish]{article}
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
+\usepackage{authblk}
+
+\captionsetup[table]{name=Tabla}
+\renewcommand{\thetable}{\Roman{figure}}
+\newcommand{\mean}[1]{\left\langle#1\right\rangle}
+%\newcommand{\eqref}[1]{Ec.~\ref{#1}}
+
+\title{TP: Q-learning}
+
+\begin{document}
+
+\maketitle
+
+\section{Introducción}
+\par En este trabajo exploramos el algoritmo de Q-learning para entrenar 
+jugadores virtuales del juego '4 en línea'. El algoritmo, en su versión más 
+básica, consiste en explorar la mayor cantidad de configuraciones 
+posibles del juego, penalizando o recompensando las distintas acciones 
+que los jugadores realizan. Al finalizar el 
+entrenamiento los jugadores virtuales tienen una valorización de algunas de las 
+acciones 
+posibles para una fracción (pequeña) del total de configuraciones posibles del 
+juego. 
+
+\subsection{Juego 4 en línea}
+
+\par El '4 en línea' es un juego de mesa para dos jugadores que consiste en 
+introducir fichas en un tablero vertical, con el objetivo de colocar 4 fichas 
+consecutivas del color correspondiente, ya sea en forma vertical, horizontal, o 
+diagonal. Gana el primer jugador que alcanza esa configuración, y en caso que el 
+tablero se complete antes de que algún jugador lo logre, se produce un empate. 
+Típicamente el tablero tiene un tamaño de 6 filas por 7 columnas, lo que da un 
+total de 4.531.985.219.092 configuraciones posibles.
+
+\section{Algoritmo de Q-learning}
+
+\par El algoritmo consiste en explorar la mayor cantidad de configuraciones 
+posibles del juego. Durante el entrenamiento (etapa de exploración), los 
+jugadores actualizan una magnitud $Q(s,a)$ que representa la ganancia o 
+valorización de realizar la acción $a$ en el estado $s$. Cuando un jugador 
+realiza una acción ganadora (aquella que lo conduce a un estado con cuatro 
+fichas alineadas) recibe una recompensa, y esto lo lleva, en el 
+transcurso del entrenamiento, a valorizar positivamente las 
+acciones que lo acercaron a dicho estado. 
+\par Finalizado el entrenamiento, la mejor estrategia teórica consiste en, dado 
+un estado $s$, elegir la acción $a$ que maximize $Q(s,a)$ (etapa de 
+explotación).
+
+\subsection{Estructura de datos}
+
+\par Almacenamos la ganancia $Q(s,a)$ en un diccionario cuyas entradas son un 
+estado representado con una variable \emph{string} de 42 caracteres de largo. 
+Así por ejemplo el \emph{string} '0021000....0' representa un estado donde 
+el primer jugador tiene una ficha en la cuarta columna, el segundo jugador en 
+la tercera, y el resto del tablero se encuentra vacío. Inicializamos los valores 
+de $Q(s,a)$ con un número real aleatorio entre 0 y 1.
+
+\subsection{Representación del problema}
+
+\par Decidimos pensar el juego como la evolución de un único sistema que puede 
+encontrarse en cualquiera de los estados mencionados en la introducción. Para 
+ello en lugar de distinguir entre dos jugadores observamos que para cada estado 
+queda inmediatamente determinado cuál de ambos contrincantes debe mover por la 
+paridad del número de fichas del mismo; así si el sistema tiene una cantidad par 
+de fichas, necesariamente juega el primer jugador en alguna de las columnas 
+disponibles, caso contrario lo hace el segundo.
+\par Por otro lado, consideramos que una correcta actualización de la ganancia 
+$Q(s,a)$ viene dada por la ecuación \ref{eq:Q}, donde $R(s,a)$ es la recompensa 
+de realizar una acción $a$ en el estado $s$, $s'$ es el estado obtenido al 
+realizar $a$ en $s$, y $a'$ es cualquiera de la acciones posibles en el estado 
+$s'$.
+\begin{equation}
+Q^{n+1}(s,a) = Q^{n}(s,a) + \alpha (R(s,a) - \gamma (max_{a'}Q^n(s',a') - Q^n(s,a))
+\label{eq:Q}
+\end{equation} 
+Dado un estado, la valorización de una acción:
+\begin{itemize}
+\item aumenta si al realizar una acción, de esta se obtiene una recompensa (en este caso se gana el juego)
+\item disminuye si la mejor acción del siguiente estado (que corresponde al otro jugador) está muy valorizada. Es decir cada jugador trata de tomar acciones que no lleven a un estado donde el otro jugador tenga una muy buena jugada.
+\end{itemize}
+Pensándolo de esta manera, en el algoritmo solo se introducen recompensas 
+positivas. Cuando un jugador gane y reciba una recompensa, el otro jugador 
+desvaluará la acción que llevó al sistema a ese estado, y valorará más las 
+otras.
+
+\subsection{Exploración de los estados: temperatura}
+
+\par Durante la fase de entrenamiento no existe \emph{a priori} ninguna 
+restricción sobre las acciones que el sistema decida explorar; estas pueden ser 
+escogidas totalmente al azar. Siguiendo esta estrategia, y al cabo de 
+cierto tiempo, la exploración recorrerá múltiples veces todos los pares 
+$(s,a)$ logrando una valorización adecuada de todas las acciones posibles para 
+todos los estados. Sin embargo dada la ingente cantidad de estados posibles 
+mencionada en la introducción, aun en un tablero pequeño esta estrategia 
+resulta impracticable en un tiempo razonable. Resulta entonces útil introducir 
+una magnitud (temperatura) que permita focalizar la búsqueda en aquellas ramas 
+del árbol de jugadas que, a la luz del entrenamiento transcurrido, parezcan la 
+más promisorias.
+
+Cuando la temperatura sea máxima el sistema 
+elije en forma equiprobable entre las acciones posibles. Si la temperatura es 
+exactamente cero, el sistema elije la acción que maximize $Q$.
+\par Con el parámetro de la temperatura, podemos realizar un entrenamiento que 
+en un principio explore lo más aleatorio posible, pero al disminuir la 
+temperatura el sistema preferirá realizar acciones con valorización alta y de 
+esta manera focalizará la búsqueda en las ramas más promisorias del árbol de 
+jugadas.
+
+\subsection{Modificaciones agregadas}
+ACA IRIAN LAS COSAS QUE LE PUSIMOS DESPUES, DE QUE GANE EL JUEGO SI TIENE 3, ETC...
+
+\section{Resultados}
+
+\section{Conclusiones}
+
+\end{document}
