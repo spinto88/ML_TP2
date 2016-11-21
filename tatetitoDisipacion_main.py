@@ -14,10 +14,12 @@ import dill
 with open('Modelo_entrenado_21dia_00hs.pk', 'rb') as in_strm:
 	mundo = dill.load(in_strm)
 
+
 timesLearn = 60*24
-halflife = (timesLearn)/4
-disipacion=0.01
+halflife = ((timesLearn)*2)/5
+disipacion=0.005
 b0=-halflife*disipacion
+
 
 
 d = datetime.now()
