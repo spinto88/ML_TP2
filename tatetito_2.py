@@ -6,7 +6,7 @@ import pylab
         
 class Tatetito(object):
 
-    def __init__(self, width = 7, height = 6, alpha = 0.01, gamma = 0.9, temp1 = 1.00, temp2 = 1.00):
+    def __init__(self, width = 7, height = 6, alpha = 0.01, gamma = 0.9, temp1 = 10.0, temp2 = 10.0):
 
         self.width = width
         self.height = height
@@ -51,10 +51,7 @@ class Tatetito(object):
         res = False
         res = res or self.cuatro(self.tablero[r,:])
         res = res or self.cuatro(self.tablero[:,c])
-        
-        #diag1 = [self.tablero[i,j] for i in range(self.height) for j in [k in range(c-3, c+3) if k >= 0 and k < self.width]]  (SEBA PINTO)
-        #diag2 = [self.tablero[i,j] for i in range(self.height) for j in [k in range(c-3, c+3).reverse if k >= 0 and k < self.width]]
-        
+         
         diag1 = []
         i = 0
         while r-i >= 0 and c-i >= 0:
@@ -166,19 +163,15 @@ class Tatetito(object):
             else:
                 temp = self.temp2
 
-            if random.random() < temp:
-                action_best = random.choice(actions)
-            else:
-                actions_Q = [[action, self.Q[state][action]] for action in actions]
-                action_best = max(actions_Q, key = lambda x: x[1])[0]    
+            p_actions = [np.exp(self.Q[state][action]/temp) for action in actions]
+	    p_actions = p_actions / np.sum(p_actions)
+            
+            action_best = np.random.choice(actions, p = p_actions)
             
             recompensa = self.reward(action_best, player)
             # 3) Calculo el nuevo valor de Q(s,a)
             # OJO: aca ya cambia el tablero
             self.move(action_best, player)
-
-
-
 
             new_state = self.aString()
             
@@ -211,7 +204,7 @@ class Tatetito(object):
         pylab.xlim([-0.5, self.width-1 + 0.5])
         pylab.ylim([-0.5, self.height-1 + 0.5])
 
-#random.seed(123459)
+random.seed(123459)
 seba_pinto = Tatetito()
 for _ in range(10000):
     seba_pinto.learn()
