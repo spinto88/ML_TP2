@@ -1,5 +1,5 @@
 import tatetito_conVision as tttt
-#import numpy as np
+import numpy as np
 #import random
 #from collections import defaultdict
 #import pylab
@@ -20,18 +20,19 @@ disipacion=0.01
 b0=-halflife*disipacion
 
 d = datetime.now()
+while d.day < 23:
+	d = datetime.now()
+	t = d.hour*d.minute
+	temp = (1/(1+np.e**(-(b0+disipacion*(timesLearn-t ) ) ) ))
+	mundo.learn(temp1=temp, temp2=temp)				
+dill.dump(mundo, file('Modelo_entrenado_23dia_00hs.pk','w'))
 while d.day < 22:
 	d = datetime.now()
 	t= d.hour*d.minute
-	temp = (1/(1+np.e**(-(b0+disipacion*(timesLearn-t ) ) ) )	
+	temp = (1/(1+np.e**(-(b0+disipacion*(timesLearn-t ) ) ) ))	
 	mundo.learn(temp1=temp, temp2=temp)				
 dill.dump(mundo, file('Modelo_entrenado_22dia_00hs.pk','w'))
-while d.day < 23:
-	d = datetime.now()
-	t= d.hour*d.minute
-	temp = (1/(1+np.e**(-(b0+disipacion*(timesLearn-t ) ) ) )	
-	mundo.learn(temp1=temp, temp2=temp)				
-dill.dump(mundo, file('Modelo_entrenado_23dia_00hs.pk','w'))
+
 
 
 
