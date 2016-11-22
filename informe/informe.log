@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.16)  22 NOV 2016 17:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=latex 2016.8.16)  22 NOV 2016 17:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -370,18 +370,10 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 95.
+Package graphics Info: Driver file: dvips.def on input line 95.
 
-(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count89
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 2015/12/30 v3.0k Driver-dependent file (DPC,SPQR)
 ))
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
@@ -391,15 +383,15 @@ Package: mathtools 2015/11/12 v1.18 mathematical typesetting tools
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count90
-\calc@Bcount=\count91
+\calc@Acount=\count89
+\calc@Bcount=\count90
 \calc@Adimen=\dimen106
 \calc@Bdimen=\dimen107
 \calc@Askip=\skip43
 \calc@Bskip=\skip44
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count92
+\calc@Ccount=\count91
 \calc@Cskip=\skip45
 )
 (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
@@ -425,13 +417,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
-\inf@bad=\count93
+\inf@bad=\count92
 LaTeX Info: Redefining \frac on input line 199.
-\uproot@=\count94
-\leftroot@=\count95
+\uproot@=\count93
+\leftroot@=\count94
 LaTeX Info: Redefining \overline on input line 297.
-\classnum@=\count96
-\DOTSCASE@=\count97
+\classnum@=\count95
+\DOTSCASE@=\count96
 LaTeX Info: Redefining \ldots on input line 394.
 LaTeX Info: Redefining \dots on input line 397.
 LaTeX Info: Redefining \cdots on input line 518.
@@ -440,15 +432,15 @@ LaTeX Info: Redefining \cdots on input line 518.
 \big@size=\dimen110
 LaTeX Font Info:    Redeclaring font encoding OML on input line 630.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
-\macc@depth=\count98
-\c@MaxMatrixCols=\count99
+\macc@depth=\count97
+\c@MaxMatrixCols=\count98
 \dotsspace@=\muskip10
-\c@parentequation=\count100
-\dspbrk@lvl=\count101
+\c@parentequation=\count99
+\dspbrk@lvl=\count100
 \tag@help=\toks19
-\row@=\count102
-\column@=\count103
-\maxfields@=\count104
+\row@=\count101
+\column@=\count102
+\maxfields@=\count103
 \andhelp@=\toks20
 \eqnshift@=\dimen111
 \alignsep@=\dimen112
@@ -467,7 +459,7 @@ LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count105
+\g_MT_multlinerow_int=\count104
 \l_MT_multwidth_dim=\dimen117
 \origjot=\skip49
 \l_MT_shortvdotswithinadjustabove_dim=\dimen118
@@ -493,7 +485,7 @@ Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
 \TX@old@col=\dimen128
 \TX@target=\dimen129
 \TX@delta=\dimen130
-\TX@cols=\count106
+\TX@cols=\count105
 \TX@ftn=\toks24
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
@@ -510,24 +502,24 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \caption@parindent=\dimen136
 \caption@hangindent=\dimen137
 )
-\c@ContinuedFloat=\count107
+\c@ContinuedFloat=\count106
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
-\c@subfigure=\count108
-\c@subtable=\count109
+\c@subfigure=\count107
+\c@subtable=\count108
 )
 (/usr/share/texlive/texmf-dist/tex/latex/preprint/authblk.sty
 Package: authblk 2001/02/27 1.3 (PWD)
 \affilsep=\skip52
 \@affilsep=\skip53
-\c@Maxaffil=\count110
-\c@authors=\count111
-\c@affil=\count112
+\c@Maxaffil=\count109
+\c@authors=\count110
+\c@affil=\count111
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count113
+\c@float@type=\count112
 \float@exts=\toks25
 \float@box=\box28
 \@float@everytoks=\toks26
@@ -554,242 +546,107 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
 LaTeX Font Info:    ... okay on input line 20.
 LaTeX Info: Redefining \. on input line 20.
 LaTeX Info: Redefining \% on input line 20.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count114
-\scratchdimen=\dimen138
-\scratchbox=\box30
-\nofMPsegments=\count115
-\nofMParguments=\count116
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count117
-\MPscratchDim=\dimen139
-\MPnumerator=\count118
-\makeMPintoPDFobject=\count119
-\everyMPtoPDFconversion=\toks28
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package epstopdf Info: Source file: <figuras/Tablero.eps>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 37046 bytes
-(epstopdf)             Output file: <figuras/Tablero-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 11504 bytes
-(epstopdf)             Command: <repstopdf --outfile=figuras/Tablero-eps-conver
-ted-to.pdf figuras/Tablero.eps>
-(epstopdf)             \includegraphics on input line 46.
-Package epstopdf Info: Output file is already uptodate.
+File: figuras/Tablero.eps Graphic file (type eps)
 
-<figuras/Tablero-eps-converted-to.pdf, id=1, 587.19376pt x 442.65375pt>
-File: figuras/Tablero-eps-converted-to.pdf Graphic file (type pdf)
+<figuras/Tablero.eps> [1
 
-<use figuras/Tablero-eps-converted-to.pdf>
-Package pdftex.def Info: figuras/Tablero-eps-converted-to.pdf used on input lin
-e 46.
-(pdftex.def)             Requested size: 293.59616pt x 221.32632pt.
- [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 LaTeX Warning: No \author given.
 
-] [2 <./figuras/Tablero-eps-converted-to.pdf>] [3]
-<Imagenes/SinVision_luchaNoLibre_QsinVison_reverse.png, id=37, 433.62pt x 433.6
-2pt>
-File: Imagenes/SinVision_luchaNoLibre_QsinVison_reverse.png Graphic file (type 
-png)
- <use Imagenes/SinVision_luchaNoLibre_QsinVison_reverse.png>
-Package pdftex.def Info: Imagenes/SinVision_luchaNoLibre_QsinVison_reverse.png 
-used on input line 130.
-(pdftex.def)             Requested size: 161.9989pt x 161.99838pt.
+] [2] [3]
 
-<Imagenes/SinVision_disipacion_QsinVison.png, id=38, 433.62pt x 433.62pt>
-File: Imagenes/SinVision_disipacion_QsinVison.png Graphic file (type png)
+! LaTeX Error: File `Imagenes/SinVision_luchaNoLibre_QsinVison_reverse' not fou
+nd.
 
-<use Imagenes/SinVision_disipacion_QsinVison.png>
-Package pdftex.def Info: Imagenes/SinVision_disipacion_QsinVison.png used on in
-put line 138.
-(pdftex.def)             Requested size: 161.9989pt x 161.99838pt.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.131 ...SinVision_luchaNoLibre_QsinVison_reverse}
+                                                  
+I could not locate the file with any of these extensions:
+.eps,.ps,.eps.gz,.ps.gz,.eps.Z,.mps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-<Imagenes/SinVision_disipacion_QsinVison_reverse.png, id=39, 433.62pt x 433.62p
-t>
-File: Imagenes/SinVision_disipacion_QsinVison_reverse.png Graphic file (type pn
-g)
- <use Imagenes/SinVision_disipacion_QsinVison_reverse.png>
-Package pdftex.def Info: Imagenes/SinVision_disipacion_QsinVison_reverse.png us
-ed on input line 145.
-(pdftex.def)             Requested size: 161.9989pt x 161.99838pt.
- [4 <./Imagenes/SinVision_luchaNoLibre_QsinVison_reverse.png (PNG copy)> <./Ima
-genes/SinVision_disipacion_QsinVison.png (PNG copy)>]
-<Imagenes/SinVision_disipacion_QconVison.png, id=43, 433.62pt x 433.62pt>
-File: Imagenes/SinVision_disipacion_QconVison.png Graphic file (type png)
 
-<use Imagenes/SinVision_disipacion_QconVison.png>
-Package pdftex.def Info: Imagenes/SinVision_disipacion_QconVison.png used on in
-put line 152.
-(pdftex.def)             Requested size: 161.9989pt x 161.99838pt.
- [5 <./Imagenes/SinVision_disipacion_QsinVison_reverse.png (PNG copy)> <./Image
-nes/SinVision_disipacion_QconVison.png (PNG copy)>]
-Package epstopdf Info: Source file: <figuras/Epsilon00.eps>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 89798 bytes
-(epstopdf)             Output file: <figuras/Epsilon00-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 43028 bytes
-(epstopdf)             Command: <repstopdf --outfile=figuras/Epsilon00-eps-conv
-erted-to.pdf figuras/Epsilon00.eps>
-(epstopdf)             \includegraphics on input line 165.
-Package epstopdf Info: Output file is already uptodate.
+! LaTeX Error: File `Imagenes/SinVision_disipacion_QsinVison' not found.
 
-<figuras/Epsilon00-eps-converted-to.pdf, id=47, 578.16pt x 433.62pt>
-File: figuras/Epsilon00-eps-converted-to.pdf Graphic file (type pdf)
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.139 ...{Imagenes/SinVision_disipacion_QsinVison}
+                                                  
+I could not locate the file with any of these extensions:
+.eps,.ps,.eps.gz,.ps.gz,.eps.Z,.mps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-<use figuras/Epsilon00-eps-converted-to.pdf>
-Package pdftex.def Info: figuras/Epsilon00-eps-converted-to.pdf used on input l
-ine 165.
-(pdftex.def)             Requested size: 173.44933pt x 130.087pt.
-Package epstopdf Info: Source file: <figuras/Epsilon01.eps>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 89714 bytes
-(epstopdf)             Output file: <figuras/Epsilon01-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 43038 bytes
-(epstopdf)             Command: <repstopdf --outfile=figuras/Epsilon01-eps-conv
-erted-to.pdf figuras/Epsilon01.eps>
-(epstopdf)             \includegraphics on input line 166.
-Package epstopdf Info: Output file is already uptodate.
 
-<figuras/Epsilon01-eps-converted-to.pdf, id=48, 578.16pt x 433.62pt>
-File: figuras/Epsilon01-eps-converted-to.pdf Graphic file (type pdf)
+! LaTeX Error: File `Imagenes/SinVision_disipacion_QsinVison_reverse' not found
+.
 
-<use figuras/Epsilon01-eps-converted-to.pdf>
-Package pdftex.def Info: figuras/Epsilon01-eps-converted-to.pdf used on input l
-ine 166.
-(pdftex.def)             Requested size: 173.44933pt x 130.087pt.
-Package epstopdf Info: Source file: <figuras/Epsilon05.eps>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 90065 bytes
-(epstopdf)             Output file: <figuras/Epsilon05-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 43167 bytes
-(epstopdf)             Command: <repstopdf --outfile=figuras/Epsilon05-eps-conv
-erted-to.pdf figuras/Epsilon05.eps>
-(epstopdf)             \includegraphics on input line 167.
-Package epstopdf Info: Output file is already uptodate.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.146 ...s/SinVision_disipacion_QsinVison_reverse}
+                                                  
+I could not locate the file with any of these extensions:
+.eps,.ps,.eps.gz,.ps.gz,.eps.Z,.mps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-<figuras/Epsilon05-eps-converted-to.pdf, id=49, 578.16pt x 433.62pt>
-File: figuras/Epsilon05-eps-converted-to.pdf Graphic file (type pdf)
 
-<use figuras/Epsilon05-eps-converted-to.pdf>
-Package pdftex.def Info: figuras/Epsilon05-eps-converted-to.pdf used on input l
-ine 167.
-(pdftex.def)             Requested size: 173.44933pt x 130.087pt.
-Package epstopdf Info: Source file: <figuras/Epsilon10.eps>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 89912 bytes
-(epstopdf)             Output file: <figuras/Epsilon10-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-22 17:00:42
-(epstopdf)                    size: 43079 bytes
-(epstopdf)             Command: <repstopdf --outfile=figuras/Epsilon10-eps-conv
-erted-to.pdf figuras/Epsilon10.eps>
-(epstopdf)             \includegraphics on input line 168.
-Package epstopdf Info: Output file is already uptodate.
+! LaTeX Error: File `Imagenes/SinVision_disipacion_QconVison' not found.
 
-<figuras/Epsilon10-eps-converted-to.pdf, id=50, 578.16pt x 433.62pt>
-File: figuras/Epsilon10-eps-converted-to.pdf Graphic file (type pdf)
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.153 ...{Imagenes/SinVision_disipacion_QconVison}
+                                                  
+I could not locate the file with any of these extensions:
+.eps,.ps,.eps.gz,.ps.gz,.eps.Z,.mps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-<use figuras/Epsilon10-eps-converted-to.pdf>
-Package pdftex.def Info: figuras/Epsilon10-eps-converted-to.pdf used on input l
-ine 168.
-(pdftex.def)             Requested size: 173.44933pt x 130.087pt.
- [6 <./figuras/Epsilon00-eps-converted-to.pdf> <./figuras/Epsilon01-eps-convert
-ed-to.pdf> <./figuras/Epsilon05-eps-converted-to.pdf> <./figuras/Epsilon10-eps-
-converted-to.pdf>]
+[4]
+File: figuras/Epsilon00.eps Graphic file (type eps)
+ <figuras/Epsilon00.eps>
+File: figuras/Epsilon01.eps Graphic file (type eps)
+ <figuras/Epsilon01.eps>
+File: figuras/Epsilon05.eps Graphic file (type eps)
+ <figuras/Epsilon05.eps>
+File: figuras/Epsilon10.eps Graphic file (type eps)
+
+<figuras/Epsilon10.eps> [5]
 
 Package caption Warning: Unused \captionsetup[table] on input line 13.
 See the caption package documentation for explanation.
 
-[7] (./informe.aux
+[6] (./informe.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 LaTeX Info: Redefining \. on input line 10.
 LaTeX Info: Redefining \% on input line 10.
-) ) 
+)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5119 strings out of 493029
- 74806 string characters out of 6136234
- 150272 words of memory out of 5000000
- 8575 multiletter control sequences out of 15000+600000
+ 4167 strings out of 493030
+ 58931 string characters out of 6136260
+ 136248 words of memory out of 5000000
+ 7658 multiletter control sequences out of 15000+600000
  10375 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,7n,39p,866b,392s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on informe.pdf (7 pages, 817757 bytes).
-PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 80 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36i,6n,39p,866b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
 
+Output written on informe.dvi (6 pages, 13472 bytes).

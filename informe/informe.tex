@@ -156,10 +156,24 @@ ETC..
 
 
 \section{Estrategias exploradas}
-\par Utilizando el algoritmo presentado en la ecuación \ref{eq:Q} exploramos la competencia entre dos jugadores, donde uno de ellos juega toma siempre una acción al azar, mientras que el otro adopta alguna estrategia, que en nuestro caso siempre será el jugador número 2. El jugador que comienza es elegido al azar.
+\par Utilizando el algoritmo presentado en la ecuación \ref{eq:Q} exploramos 
+el impacto de la estrategia adoptada sobre el desempeño de juego. Convenimos en 
+entrenar siempre al jugador 2 y medir su desempeño al enfrentarse con un 
+contendiente (jugador 1) que elije siempre acciones al azar (temperatura 
+infinita). Para anular cualquier posible impacto de la iniciativa sobre el 
+desempeño definimos de manera equiprobable qué jugador mueve primero en cada 
+partido, así en promedio ambos jugadores comenzarán la misma cantidad de veces.
 
 \subsection{E-greedy}
-\par Una de las estregias exploradas es la \emph{e-greedy}, en la cual el jugador número 2, elije con probabilidad $\epsilon$ una acción al azar, y con una probabilidad $1-\epsilon$, la acción con la mayor valorización. Exploramos para valores de $\epsilon = 0.1$, $0.5$, $1.00$, y $0.00$. Las dos últimas se corresponden, respectivamente, al caso donde ambos jugadores juegan al azar, y cuando el jugador número 2 siempre juega a la acción de mayor valorización, es decir, prácticamente no explora. En la figura \ref{fig:e_greedy} observamos la evolución de las victorias acumuladas de cada jugador en función del número de jugadas.
+\par Una de las estregias exploradas es la \emph{e-greedy}, en la cual el 
+jugador número 2, elije con probabilidad $\epsilon$ una acción al azar, y con 
+una probabilidad $1-\epsilon$, la acción con la mayor valorización. Exploramos 
+para valores de $\epsilon = 0.1$, $0.5$, $1.00$, y $0.00$. Las dos últimas se 
+corresponden, respectivamente, al caso donde ambos jugadores juegan al azar, y 
+cuando el jugador número 2 siempre juega a la acción de mayor valorización, es 
+decir, prácticamente no explora. En la figura \ref{fig:e_greedy} observamos la 
+evolución de las victorias acumuladas de cada jugador en función del número de 
+jugadas.
 \par De la figura \ref{fig:e_greedy} concluímos que un valor bajo $\epsilon$, pero no nulo, ayuda al jugador 2 a sacar cierta ventaja del 1. En este caso, el jugador explora el 10\% de las veces y el resto juega a la mejor jugada. Observamos que a partir del paso $10000$, la exploración inicial ya es suficiente, y comienza a sacar ventaja de la información ganada durante ese lapso. 
 \begin{figure}
 \centering
