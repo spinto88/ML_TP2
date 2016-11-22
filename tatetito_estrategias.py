@@ -151,7 +151,7 @@ class Tatetito(object):
     def learn(self, steps = np.inf):
 
         # Inicializo
-	player = 1 
+	player = random.choice([1,2])
         action_best = np.random.randint(self.width)
         step = 0
         self.tablero = np.zeros([self.height, self.width], dtype = np.int16)
@@ -256,58 +256,47 @@ class Tatetito(object):
         pylab.show()
 
 
+def __main__():
 
-# Los dos random
-random.seed(123457)
-np.random.seed(123457)
+    j = 0
 
-"""
-tato = Tatetito()
-winners = []
-for k in range(1000):
-    winners.append(tato.learn())
-"""
+    for epsilon2 in [0.00, 0.10, 0.50, 1.00]:
 
-j = 0
-for epsilon2 in [1.00]:
+        random.seed(123458)
+        np.random.seed(123458)
 
-    random.seed(123458)
-    np.random.seed(123458)
+        # El jugador 2 con e-greedy
+        tato = Tatetito()
+        tato.strategy2 = 'e-greedy'
+        tato.epsilon2 = epsilon2
 
-    # El jugador 2 con e-greedy
-    tato = Tatetito()
-    winners = []
-    tato.strategy2 = 'e-greedy'
+        winners = []
+        for k in range(100000):
+            winners.append(tato.learn())
 
-    tato.epsilon2 = epsilon2
-    for k in range(100000):
-        winners.append(tato.learn())
+        # Cuento las victorias
+        victorias1 = []
+        acum = 0
+        for i in winners:
+            if i == 1:
+                acum += 1
+            victorias1.append(acum)
 
-    # Cuento las victorias
-    victorias1 = []
-    acum = 0
-    for i in winners:
-        if i == 1:
-            acum += 1
-        victorias1.append(acum)
+        victorias2 = []
+        acum = 0
+        for i in winners:
+            if i == 2:
+                acum += 1
+            victorias2.append(acum)
 
-    victorias2 = []
-    acum = 0
-    for i in winners:
-        if i == 2:
-            acum += 1
-        victorias2.append(acum)
-
-    plt.clf()
-    plt.plot(victorias1, label = 'Jugador 1')
-    plt.plot(victorias2, label = 'Jugador 2')
-    plt.axis([0, 100000, 0, 100000])
-    plt.xlabel('Juegos')
-    plt.ylabel('Victorias acumuladas')
-    plt.legend(loc = 'best')
-    plt.grid('on')
-    plt.title('Epsilon jugador 2:' + str(tato.epsilon2))
-    #plt.savefig('Epsilon' + str(j) + '_b.eps')
-    plt.show()
-    j += 1
-
+        plt.figure(j)
+        plt.plot(victorias1, '-', linewidth = 2, label = 'Jugador 1')
+        plt.plot(victorias2, '-', linewidth = 2, label = 'Jugador 2')
+        plt.axis([0, 100000, 0, 70000])
+        plt.xlabel('Juegos')
+        plt.ylabel('Victorias acumuladas')
+        plt.legend(loc = 'best')
+        plt.grid('on')
+        plt.title('Epsilon jugador 2: ' + str(tato.epsilon2))
+        plt.savefig('Epsilon' + str(epsilon2) + '.eps')
+	j += 1
