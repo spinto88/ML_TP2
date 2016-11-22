@@ -8,6 +8,7 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 \usepackage{authblk}
+\usepackage{float} % para que los gr\'aficos se queden en su lugar con [H]
 
 \captionsetup[table]{name=Tabla}
 \renewcommand{\thetable}{\Roman{figure}}
@@ -122,6 +123,36 @@ otra focalizada sobre las ramas más promisorias del árbol de jugadas.
 ACA IRIAN LAS COSAS QUE LE PUSIMOS DESPUES, DE QUE GANE EL JUEGO SI TIENE 3, ETC...
 
 \section{Resultados}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{Imagenes/SinVision_luchaNoLibre_QsinVison_reverse}
+    \end{subfigure}
+    \caption{}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{Imagenes/SinVision_disipacion_QsinVison}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{Imagenes/SinVision_disipacion_QsinVison_reverse}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{Imagenes/SinVision_disipacion_QconVison}
+    \end{subfigure}
+\end{figure}
+
 
 \section{Estrategias exploradas}
 \par Utilizando el algoritmo presentado en la ecuación \ref{eq:Q} exploramos la competencia entre dos jugadores, donde uno de ellos juega toma siempre una acción al azar, mientras que el otro adopta alguna estrategia, que en nuestro caso siempre será el jugador número 2. El jugador que comienza es elegido al azar.
