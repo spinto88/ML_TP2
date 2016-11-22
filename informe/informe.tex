@@ -15,7 +15,8 @@
 \newcommand{\mean}[1]{\left\langle#1\right\rangle}
 %\newcommand{\eqref}[1]{Ec.~\ref{#1}}
 
-\title{TP: Q-learning}
+\title{Q-learning}
+\author{Gustavo Landfried, Guillermo Pasqualetti, Sebastián Pinto}
 
 \begin{document}
 
@@ -38,7 +39,7 @@ en introducir fichas en un tablero vertical, con el objetivo de colocar cuatro
 fichas consecutivas del color correspondiente, ya sea en forma vertical, 
 horizontal, o diagonal. Gana el primer jugador que alcanza esa configuración, y 
 en caso que el tablero se complete antes de que algún jugador lo logre 
-(ver figura \ref{fig:tablero} , se produce un empate. 
+(ver figura \ref{fig:tablero}), se produce un empate. 
 Típicamente el tablero tiene un tamaño de 6 filas por 7 columnas, lo que da un 
 total de 4.531.985.219.092 configuraciones posibles.
 \begin{figure}
@@ -119,18 +120,13 @@ estrategia de entrenamiento desde una puramente exploratoria y abarcativa hacia
 otra focalizada sobre las ramas más promisorias del árbol de jugadas.
 
 \subsection{Modificaciones agregadas}
-ACA IRIAN LAS COSAS QUE LE PUSIMOS DESPUES, DE QUE GANE EL JUEGO SI TIENE 3, 
-ETC..
 
-Suponiendo que el algoritmo no iba a converger, generamos una versi\'on paralalea ``con visi\'on''. En esta versi\'on los jugadores no dejen pasar un 4 en l\'inea, y que no elijan una jugada que deja un 4 en li\'nea del oponente. Con saben un jugar a un paso de distancia del objetivo. A temperatura 0 no se dejan perder y no desaprovechan una victoria cuando pueden. Sin embargo los jugadores tienen que aprender el valor del resto de las acciones. Al empezar solo entienden cuando la situación está en frente suyos. Lo que tienen que aprender es a llevar el juego hacia esos estados, no llegar por azar ahí. En un contexto donde los jugadores tienen este tipo de visi\'on la \'unica forma de ganar es aprendan a armar las "trampas" en las que el oponente no puede bloquear, esto es, dejar dos posibles 4 en línea.
-
+\par Suponiendo que el algoritmo no iba a converger, generamos una versión alternatica ``con visión''. En la misma los jugadores, a temperatura nula, no dejan pasar la oportunidad de generar un 4 en línea ante la presencia de tres fichas alineadas e intentan evitar, ante una situación en que su oponente se encuentre con tres fichas alineadas, que este logre conectar una cuarta.
+\par En un contexto donde los jugadores tienen este tipo de visi\'on, la \'unica forma de ganar es que aprendan a armar las "trampas" en las que el oponente no puede bloquear, es decir, donde hay dos posibles 4 en línea.
 
 \section{Resultados}
 
-Dejamos corriendo una versi\'on del qleraning desde el s\'abado a la ma\~nana hasta la un \'ultimo backup del $Q$ el m\'artes a la mañana. 
-
-Con este $Q$ corremos una competencia entre los jugadores. Dudamos de que haya aprendido bien. Es enspecial el jugador 2. Por eso corremos una version de competenecia con el jugador 1 al azar y el 2 basado en los valores de Q. Lo que obtenemos es lo siguiente. 
-
+\par Tras entrenar el algoritmo durante tres días, obtuvimos una valuación de $Q$ con la cual corrimos una competencia entre los jugadores, donde el jugador 2 basó su juego en dichos valores, mientras que el jugador 1 tomó acciones aleatorias, obteniendo los siguientes resultados:
 
 \begin{figure}[H]
     \centering
@@ -140,7 +136,8 @@ Con este $Q$ corremos una competencia entre los jugadores. Dudamos de que haya a
     \caption{Jugador 1 al azar. Jugador 2 basado en los valores Q}
 \end{figure}
 
-En este experimiento dejamos la ``temperatura''. Ahora, hacemos un experimiento simiolar, perto variando la temperatura de un solo jugador, y dejando el otro jugando al azar. Hacemos esto para los dos jugadores. Lo que obtenemos es lo siguiente. 
+\par En este experimento, dejamos la ``temperatura''(GUS FIJATE QUE QUISISTE PONER ACA). 
+Ahora hacemos un experimiento similar, pero variando la temperatura de un solo jugador y dejando el otro jugando completamente al azar. Hacemos esto para los dos jugadores. Lo que obtenemos es lo siguiente: 
 
 \begin{figure}[H]
     \centering
@@ -153,7 +150,7 @@ En este experimiento dejamos la ``temperatura''. Ahora, hacemos un experimiento 
     \caption{Un jugador al azar y un jugador bajando la temperatura}
 \end{figure}
 
-La versi\'on modificada de actualizaci\'on de Q ``con visi\'on'' tambi\'en aprendi\'o. Esta versi\'on la dejamos corriendo del s\'abado a la ma\~nana hasta el domingo a las 23.59hs. Usando el Q resultante corrimos una competencia de los jugadores, ahora sin visi\'on, basados solo en el Q. En el experimiento en el que se var\'ia la temperatira de un jugador y se el otro jugador fijo en el azar, los resultados son los siguientes. 
+\par La versión modificada de actualización de Q ``con visión'' también aprendió. Esta versión la dejamos corriendo del sábado a la mañana hasta el domingo a las 23.59hs. Usando el Q resultante corrimos una competencia de los jugadores, ahora sin visión, basados solo en el Q. En el experimiento en el que se varía la temperatura de un jugador, mientras que el otro juega al azar, los resultados son los siguientes:
 
 \begin{figure}[H]
     \centering
@@ -187,7 +184,8 @@ pero no nulo, ayuda al jugador 2 a sacar cierta ventaja del 1. En este caso, el
 jugador explora el 10\% de las veces y el resto juega a la mejor jugada. 
 Observamos que a partir del paso $10000$, la exploración inicial ya es 
 suficiente, y comienza a sacar ventaja de la información ganada durante ese 
-lapso. 
+lapso. Cabe mencionar que solo entrenamos durante $100000$ partidas, lo que da lugar a un número de estados visitados que podemos acotar superiomente por $42$ x$100000$, que es del orden de la millonésima parte del total de estados, mencionados en la introducción.
+
 \begin{figure}
 \centering
 \includegraphics[scale = 0.3]{figuras/Epsilon00.eps}
@@ -211,12 +209,17 @@ exploración pero a medida de que la temperatura descienda variará hacia una
 mayor explotación. Sin embargo observamos que los valores $Q$ no estaban 
 acotados ni superior ni inferiormente por lo que los cálculos de la 
 exponencial arrojaron errores númericos insalvables. Nos resultó 
-muy dificil explorar este algortimo.
+muy dificil explorar este algoritmo.
 \begin{equation}
 P(s,a) = \frac{\exp(Q(s,a)/T)}{\sum_{a'}{\exp(Q(s,a')/T)}}
 \label{eq:softmax}
 \end{equation}
 
 \section{Conclusiones}
+
+\par Implementamos un algoritmo basado en Q-learning para entrenar jugadores virtuales del juego 4 en línea. El algoritmo basicamente consistió en explorar con diferentes estrategias, la mayor cantidad de estados posibles del juego y valorizar la acciones que se toman en cada uno de ellos.
+\par Observamos el comportamiento de un jugador que toma decisiones con una dada estrategia en contra de uno que toma acciones aleatoriamente. En particular, empleamos la estrategia \emph{e-greedy}, donde observamos que el jugador entrenado saca una leve ventaja para valores de $\epsilon$ pequeños pero no nulos, es decir, en escenarios donde la exploración aleatoria es poco frecuente. Para otras estrategias, nos enfrentamos a problemas númericos que no nos permitieron avanzarcon la investigación.
+\par Por otro lado, exploramos una versión alternativa que llamamos ``con visión''. (ACA GUS ESCRIBI LO QUE QUIERAS)
+
 
 \end{document}
