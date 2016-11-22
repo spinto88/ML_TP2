@@ -1,0 +1,88 @@
+\documentclass[shownotes]{beamer}
+\input{header.tex}
+<<echo=FALSE>>=
+setwd("/home/landfried/gaming/materias/aprendizaje_automatico/ML_TP2/Presentacion")
+@
+
+
+\title{Q learning}
+
+\author{Socio Fisica}
+\institute[DC-UBA]{FCEyN - UBA}
+\date{\today}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+
+\begin{frame}
+
+\titlepage
+  
+\end{frame}
+
+\begin{frame}{}
+
+<<label=SinVision_luchaNoLibre_QsinVison_reverse , echo=F, eval=True , include=F, fig=TRUE, png=TRUE,pdf=FALSE, prefix=FALSE>>=
+source("../Imagenes/SinVision_luchaNoLibre_QsinVison_reverse.R")
+@
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../Imagenes/SinVision_luchaNoLibre_QsinVison_reverse}
+    \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{}
+
+<<label=SinVision_disipacion_QsinVison , echo=F, eval=True , include=F, fig=TRUE, png=TRUE,pdf=FALSE, prefix=FALSE>>=
+source("../Imagenes/SinVision_disipacion_QsinVison.R")
+@
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../Imagenes/SinVision_disipacion_QsinVison}
+    \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{}
+
+<<label=SinVision_disipacion_QsinVison_reverse , echo=F, eval=True , include=F, fig=TRUE, png=TRUE,pdf=FALSE, prefix=FALSE>>=
+source("../Imagenes/SinVision_disipacion_QsinVison_reverse.R")
+@
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../Imagenes/SinVision_disipacion_QsinVison_reverse}
+    \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{}
+
+<<label=SinVision_disipacion_QconVison , echo=F, eval=True , include=F, fig=TRUE, png=TRUE,pdf=FALSE, prefix=FALSE>>=
+source("../Imagenes/SinVision_disipacion_QconVison.R")
+@
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../Imagenes/SinVision_disipacion_QconVison}
+    \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+
+\end{document}
