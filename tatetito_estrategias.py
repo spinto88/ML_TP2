@@ -10,17 +10,18 @@ class Tatetito(object):
     def __init__(self, width = 7, height = 6, alpha = 0.01, gamma = 0.9, \
                  temp1 = 100.0, temp2 = 100.0, epsilon1 = 1.00, epsilon2 = 1.00):
 
+	# Tablero
         self.width = width
         self.height = height
-
         self.tablero = np.zeros([height, width], dtype = np.int16)
         
         self.Q = defaultdict(lambda: defaultdict(lambda: random.random()))
         
+	# Parametros del Q-learning
         self.alpha = alpha
         self.gamma = gamma
 
-        # Estrategias 
+        # Estrategias: random, e-greedy, softmax 
         self.strategy1 = 'random'
         self.strategy2 = 'random'
 
@@ -43,7 +44,7 @@ class Tatetito(object):
             res += str(casilla)
         return res
 
-    
+    # Observa si hay cuatro en una linea
     def cuatro(self, lista):
 
         lista_str = ''
@@ -57,7 +58,7 @@ class Tatetito(object):
         else:
             return False
 
-    
+    # Observa si hay cuatro en linea en el tablero
     def cuatroEnLinea(self,r,c):
 
         res = False
@@ -90,7 +91,8 @@ class Tatetito(object):
         res = res or self.cuatro(diag2)
         return res
         
-
+    # Observa si el estado es terminal, 
+    # si hay cuatro en linea o esta lleno
     def isTerminal(self, c):
         
         if self.learning_step == 0: return "Falso"
@@ -128,10 +130,8 @@ class Tatetito(object):
                 break
 
 
-    # FALTA VER ESTA FUNCION, CREO QUE HAY QUE PASARLE PLAYER, 
-    # Y QUE NO DE RECOMPENSA SI ES EMPATE!!!
-    """ Funcion recompensa, tengo una reward positiva si desde state
-    usando action llego a un estado terminal """
+    # Funcion recompensa, obtengo si hago una jugada 
+    # que me lleva al cuatro en linea
     def reward(self, action, player):
         
         self.move(action, player)
@@ -139,7 +139,8 @@ class Tatetito(object):
             res = 100
         else:
             res = 0
-        # "Desmueve"
+
+        # Desmueve: lleva al tablero a la misma posicion de antes
         for r in range(self.height):
             if self.tablero[r,action] == 0:
                 r = r-1
@@ -148,15 +149,19 @@ class Tatetito(object):
         return res
     
         
+    # Algoritmo propio del aprendiza
     def learn(self, steps = np.inf):
 
-        # Inicializo
+        # Inicializo un jugador al azar y accion al azar
+
 	player = random.choice([1,2])
         action_best = np.random.randint(self.width)
         step = 0
+
+	# Tablero vacio
         self.tablero = np.zeros([self.height, self.width], dtype = np.int16)
+
         # Repito hasta que state sea terminal
-        # VER ACA, QUE ES LO QUE LE PASAMOS COMO STATE!!!!!
         while self.isTerminal(action_best) == "Falso" and step < steps:
 
             self.learning_step += 1
@@ -193,6 +198,7 @@ class Tatetito(object):
                         except:
                             actions_Q = [[action, self.Q[state][action]] for action in actions]                
                             action_best = max(actions_Q, key = lambda x: x[1])[0]
+
             # Jugador 2
             if player == 2:
                 if self.strategy2 == 'random':
@@ -217,22 +223,23 @@ class Tatetito(object):
                             actions_Q = [[action, self.Q[state][action]] for action in actions]                
                             action_best = max(actions_Q, key = lambda x: x[1])[0]
 
- 
+	    # Veo si hay recompensa 
             recompensa = self.reward(action_best, player)
             
-            # 3) Calculo el nuevo valor de Q(s,a)
-            # OJO: aca ya cambia el tablero
+            # Realizo la accion
             self.move(action_best, player)
 
+	    # Obtengo el nuevo estado
             new_state = self.aString()
             
+            # Veo las nuevas acciones posibles
             new_actions = self.accionesPosibles()
 
             try:
                 new_actions_Q = [[action, self.Q[new_state][action]] for action in new_actions]                
                 new_action_best = max(new_actions_Q, key = lambda x: x[1])[0]          
 
-                # Aca hay que revisar conceptualmente si el - de gamma esta bien
+                # Actualizacon del Q
                 self.Q[state][action_best] += self.alpha*(recompensa - self.gamma * (
                     self.Q[new_state][new_action_best] - self.Q[state][action_best]))
     
@@ -242,10 +249,14 @@ class Tatetito(object):
             except ValueError:
                 pass
             
+        # Si es terminal devuelvo quien gana o si hay empate
         return self.isTerminal(action_best)
         
         
+    # Metodo dibujo el tablero
     def draw(self):        
+
+        pylab.clf()
         color_dict = {0: 'white', 1: 'red', 2: 'green'}
         
         for row in range(self.height):
@@ -253,50 +264,60 @@ class Tatetito(object):
                 pylab.plot(col, row, '.', markersize=30, color=color_dict[self.tablero[row,col]])
         pylab.xlim([-0.5, self.width-1 + 0.5])
         pylab.ylim([-0.5, self.height-1 + 0.5])
+        pylab.grid('on')
         pylab.show()
 
 
-def __main__():
 
-    j = 0
+# Main del archivo
+# Explora la evolucion del juego cuando el jugador 2 implementa
+# una estrategia de e-greedy
 
-    for epsilon2 in [0.00, 0.10, 0.50, 1.00]:
+j = 0
 
-        random.seed(123458)
-        np.random.seed(123458)
+for epsilon2 in [0.00, 0.10, 0.20, 0.50, 1.00]:
 
-        # El jugador 2 con e-greedy
-        tato = Tatetito()
-        tato.strategy2 = 'e-greedy'
-        tato.epsilon2 = epsilon2
+   # Seteo las semillas
+   random.seed(123458)
+   np.random.seed(123458)
 
-        winners = []
-        for k in range(100000):
-            winners.append(tato.learn())
+   tato = Tatetito()
 
-        # Cuento las victorias
-        victorias1 = []
-        acum = 0
-        for i in winners:
-            if i == 1:
-                acum += 1
-            victorias1.append(acum)
+   # El jugador 2 con e-greedy
+   tato.strategy2 = 'e-greedy'
+   tato.epsilon2 = epsilon2
 
-        victorias2 = []
-        acum = 0
-        for i in winners:
-            if i == 2:
-                acum += 1
-            victorias2.append(acum)
+   winners = []
+   for k in range(1):
+       winners.append(tato.learn())
 
-        plt.figure(j)
-        plt.plot(victorias1, '-', linewidth = 2, label = 'Jugador 1')
-        plt.plot(victorias2, '-', linewidth = 2, label = 'Jugador 2')
-        plt.axis([0, 100000, 0, 70000])
-        plt.xlabel('Juegos')
-        plt.ylabel('Victorias acumuladas')
-        plt.legend(loc = 'best')
-        plt.grid('on')
-        plt.title('Epsilon jugador 2: ' + str(tato.epsilon2))
-        plt.savefig('Epsilon' + str(epsilon2) + '.eps')
-	j += 1
+   # Cuento las victorias
+   victorias1 = []
+   acum = 0
+   for i in winners:
+       if i == 1:
+           acum += 1
+       victorias1.append(acum)
+
+   victorias2 = []
+   acum = 0
+   for i in winners:
+       if i == 2:
+           acum += 1
+       victorias2.append(acum)
+   
+   plt.figure(j)
+   plt.plot(victorias1, '-', linewidth = 2, label = 'Jugador 1')
+   plt.plot(victorias2, '-', linewidth = 2, label = 'Jugador 2')
+   plt.axis([0, 100000, 0, 70000])
+   plt.xlabel('Juegos')
+   plt.ylabel('Victorias acumuladas')
+   plt.legend(loc = 'best')
+   plt.grid('on')
+   plt.title('Epsilon jugador 2: ' + str(tato.epsilon2))
+   plt.savefig('Epsilon' + str(epsilon2) + '.eps')
+   j += 1
+   
+
+   # Grafico del tablero
+   tato.draw()
