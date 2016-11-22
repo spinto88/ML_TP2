@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.9.16)  22 NOV 2016 15:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.9.16)  22 NOV 2016 16:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -515,122 +515,141 @@ e
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
+Package epstopdf Info: Source file: <figuras/Tablero.eps>
+(epstopdf)                    date: 2016-11-22 16:30:25
+(epstopdf)                    size: 37046 bytes
+(epstopdf)             Output file: <figuras/Tablero-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-11-22 16:33:50
+(epstopdf)                    size: 11504 bytes
+(epstopdf)             Command: <repstopdf --outfile=figuras/Tablero-eps-conver
+ted-to.pdf figuras/Tablero.eps>
+(epstopdf)             \includegraphics on input line 45.
+Package epstopdf Info: Output file is already uptodate.
 
-[1
+<figuras/Tablero-eps-converted-to.pdf, id=1, 587.19376pt x 442.65375pt>
+File: figuras/Tablero-eps-converted-to.pdf Graphic file (type pdf)
+
+<use figuras/Tablero-eps-converted-to.pdf>
+Package pdftex.def Info: figuras/Tablero-eps-converted-to.pdf used on input lin
+e 45.
+(pdftex.def)             Requested size: 293.59616pt x 221.32632pt.
+ [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 LaTeX Warning: No \author given.
 
-] [2] [3]
+] [2 <./figuras/Tablero-eps-converted-to.pdf>] [3]
 Package epstopdf Info: Source file: <figuras/Epsilon00.eps>
-(epstopdf)                    date: 2016-11-22 15:49:45
+(epstopdf)                    date: 2016-11-22 15:59:47
 (epstopdf)                    size: 89798 bytes
 (epstopdf)             Output file: <figuras/Epsilon00-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-22 15:53:05
+(epstopdf)                    date: 2016-11-22 15:59:47
 (epstopdf)                    size: 43028 bytes
 (epstopdf)             Command: <repstopdf --outfile=figuras/Epsilon00-eps-conv
 erted-to.pdf figuras/Epsilon00.eps>
-(epstopdf)             \includegraphics on input line 125.
+(epstopdf)             \includegraphics on input line 134.
 Package epstopdf Info: Output file is already uptodate.
- <figuras/Epsilon00-eps-converted-to.pdf, id=24, 578.16pt x 433.62pt>
+
+<figuras/Epsilon00-eps-converted-to.pdf, id=37, 578.16pt x 433.62pt>
 File: figuras/Epsilon00-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figuras/Epsilon00-eps-converted-to.pdf>
 Package pdftex.def Info: figuras/Epsilon00-eps-converted-to.pdf used on input l
-ine 125.
+ine 134.
 (pdftex.def)             Requested size: 173.44933pt x 130.087pt.
 Package epstopdf Info: Source file: <figuras/Epsilon01.eps>
-(epstopdf)                    date: 2016-11-22 15:40:18
+(epstopdf)                    date: 2016-11-22 15:59:47
 (epstopdf)                    size: 89714 bytes
 (epstopdf)             Output file: <figuras/Epsilon01-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-22 15:43:59
+(epstopdf)                    date: 2016-11-22 15:59:47
 (epstopdf)                    size: 43038 bytes
 (epstopdf)             Command: <repstopdf --outfile=figuras/Epsilon01-eps-conv
 erted-to.pdf figuras/Epsilon01.eps>
-(epstopdf)             \includegraphics on input line 126.
+(epstopdf)             \includegraphics on input line 135.
 Package epstopdf Info: Output file is already uptodate.
 
-<figuras/Epsilon01-eps-converted-to.pdf, id=25, 578.16pt x 433.62pt>
+<figuras/Epsilon01-eps-converted-to.pdf, id=38, 578.16pt x 433.62pt>
 File: figuras/Epsilon01-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figuras/Epsilon01-eps-converted-to.pdf>
 Package pdftex.def Info: figuras/Epsilon01-eps-converted-to.pdf used on input l
-ine 126.
+ine 135.
 (pdftex.def)             Requested size: 173.44933pt x 130.087pt.
 Package epstopdf Info: Source file: <figuras/Epsilon05.eps>
-(epstopdf)                    date: 2016-11-22 15:40:18
+(epstopdf)                    date: 2016-11-22 15:59:47
 (epstopdf)                    size: 90065 bytes
 (epstopdf)             Output file: <figuras/Epsilon05-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-22 15:45:26
+(epstopdf)                    date: 2016-11-22 15:59:47
 (epstopdf)                    size: 43167 bytes
 (epstopdf)             Command: <repstopdf --outfile=figuras/Epsilon05-eps-conv
 erted-to.pdf figuras/Epsilon05.eps>
-(epstopdf)             \includegraphics on input line 127.
+(epstopdf)             \includegraphics on input line 136.
 Package epstopdf Info: Output file is already uptodate.
 
-<figuras/Epsilon05-eps-converted-to.pdf, id=26, 578.16pt x 433.62pt>
+<figuras/Epsilon05-eps-converted-to.pdf, id=39, 578.16pt x 433.62pt>
 File: figuras/Epsilon05-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figuras/Epsilon05-eps-converted-to.pdf>
 Package pdftex.def Info: figuras/Epsilon05-eps-converted-to.pdf used on input l
-ine 127.
+ine 136.
 (pdftex.def)             Requested size: 173.44933pt x 130.087pt.
 Package epstopdf Info: Source file: <figuras/Epsilon10.eps>
-(epstopdf)                    date: 2016-11-22 15:40:18
+(epstopdf)                    date: 2016-11-22 15:59:47
 (epstopdf)                    size: 89912 bytes
 (epstopdf)             Output file: <figuras/Epsilon10-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-11-22 15:45:27
+(epstopdf)                    date: 2016-11-22 15:59:47
 (epstopdf)                    size: 43079 bytes
 (epstopdf)             Command: <repstopdf --outfile=figuras/Epsilon10-eps-conv
 erted-to.pdf figuras/Epsilon10.eps>
-(epstopdf)             \includegraphics on input line 128.
+(epstopdf)             \includegraphics on input line 137.
 Package epstopdf Info: Output file is already uptodate.
 
-<figuras/Epsilon10-eps-converted-to.pdf, id=27, 578.16pt x 433.62pt>
+<figuras/Epsilon10-eps-converted-to.pdf, id=40, 578.16pt x 433.62pt>
 File: figuras/Epsilon10-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figuras/Epsilon10-eps-converted-to.pdf>
 Package pdftex.def Info: figuras/Epsilon10-eps-converted-to.pdf used on input l
-ine 128.
+ine 137.
 (pdftex.def)             Requested size: 173.44933pt x 130.087pt.
-
+ [4] [5 <./figuras/Epsilon00-eps-converted-to.pdf> <./figuras/Epsilon01-eps-con
+verted-to.pdf> <./figuras/Epsilon05-eps-converted-to.pdf> <./figuras/Epsilon10-
+eps-converted-to.pdf>]
 
 Package caption Warning: Unused \captionsetup[table] on input line 12.
 See the caption package documentation for explanation.
 
-[4 <./figuras/Epsilon00-eps-converted-to.pdf> <./figuras/Epsilon01-eps-converte
-d-to.pdf> <./figuras/Epsilon05-eps-converted-to.pdf> <./figuras/Epsilon10-eps-c
-onverted-to.pdf>] [5] (./informe.aux
+[6] (./informe.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 LaTeX Info: Redefining \. on input line 10.
 LaTeX Info: Redefining \% on input line 10.
 ) ) 
 Here is how much of TeX's memory you used:
- 4913 strings out of 493105
- 71804 string characters out of 6137072
- 146912 words of memory out of 5000000
- 8309 multiletter control sequences out of 15000+600000
+ 4920 strings out of 493105
+ 72003 string characters out of 6137072
+ 148928 words of memory out of 5000000
+ 8315 multiletter control sequences out of 15000+600000
  10375 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,7n,38p,680b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,7n,38p,866b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on informe.pdf (5 pages, 298141 bytes).
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on informe.pdf (6 pages, 317028 bytes).
 PDF statistics:
- 216 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
+ 235 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

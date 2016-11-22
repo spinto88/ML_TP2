@@ -125,6 +125,8 @@ ACA IRIAN LAS COSAS QUE LE PUSIMOS DESPUES, DE QUE GANE EL JUEGO SI TIENE 3, ETC
 
 \section{Estrategias exploradas}
 \par Utilizando el algoritmo presentado en la ecuación \ref{eq:Q} exploramos la competencia entre dos jugadores, donde uno de ellos juega toma siempre una acción al azar, mientras que el otro adopta alguna estrategia, que en nuestro caso siempre será el jugador número 2. El jugador que comienza es elegido al azar.
+
+\subsection{E-greedy}
 \par Una de las estregias exploradas es la \emph{e-greedy}, en la cual el jugador número 2, elije con probabilidad $\epsilon$ una acción al azar, y con una probabilidad $1-\epsilon$, la acción con la mayor valorización. Exploramos para valores de $\epsilon = 0.1$, $0.5$, $1.00$, y $0.00$. Las dos últimas se corresponden, respectivamente, al caso donde ambos jugadores juegan al azar, y cuando el jugador número 2 siempre juega a la acción de mayor valorización, es decir, prácticamente no explora. En la figura \ref{fig:e_greedy} observamos la evolución de las victorias acumuladas de cada jugador en función del número de jugadas.
 \par De la figura \ref{fig:e_greedy} concluímos que un valor bajo $\epsilon$, pero no nulo, ayuda al jugador 2 a sacar cierta ventaja del 1. En este caso, el jugador explora el 10\% de las veces y el resto juega a la mejor jugada. Observamos que a partir del paso $10000$, la exploración inicial ya es suficiente, y comienza a sacar ventaja de la información ganada durante ese lapso. 
 \begin{figure}
@@ -136,6 +138,14 @@ ACA IRIAN LAS COSAS QUE LE PUSIMOS DESPUES, DE QUE GANE EL JUEGO SI TIENE 3, ETC
 \caption{Victorias acumuladas en función del número de juegos realizados. Se observa que el jugador 2 saca ventaja al implementar una estrategia \emph{e-greedy} con $\epsilon$ bajos. De izquierda a derecha, y de arriba hacia abajo, $\epsilon = $ $0.00$, $0.10$, $0.50$ y $1.00$.}
 \label{fig:e_greedy}
 \end{figure}
+
+\subsection{Softmax}
+\par El siguiente paso que buscamos explorar fue la de implementar una estrategia softmax, en la cual la elección de la acción se da con una probabilidad dada por la ecuación \ref{eq:softmax}, donde $T$ es la temperatura del sistema. La idea original era la implementación de una temperatura alta e ir disminuyendola gradualmente, de esta forma el jugador que adopte esta estrategia explorará al principio la mayor cantidad de estados con probabilidad casi uniforme, y a medida de que la temperatura sea más baja, elegirá con mayor probabilidad los estados con $Q$ mayor. Sin embargo, en el caso anterior observamos que los valores $Q$ no estaban acotados, tanto superior como inferiormente, por lo tanto en el cálculo de la exponencial tuvimos errores númericos, por lo que nos resultó muy dificil explorar este algortimo.
+\begin{equation}
+P(s,a) = \frac{\exp(Q(s,a)/T)}{\sum_{a'}{\exp(Q(s,a')/T)}}
+\label{eq:softmax}
+\end{equation}
+
 
 
 \section{Conclusiones}
