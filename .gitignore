@@ -1,2 +1,6 @@
-*.pk
 *.pyc
+*.backup
+*.log
+*.pk
+*.csv
+

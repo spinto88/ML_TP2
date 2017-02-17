@@ -1,15 +1,22 @@
 import numpy as np
 import random
 from collections import defaultdict
-import pylab
+#import pylab
+#import cPickle as pk
 import dill
+#import os
+#os.chdir('/home/landfried/gaming/materias/aprendizaje_automatico/ML_TP2')
+
         
 class Tatetito(object):
 
-    def __init__(self, width = 7, height = 6, alpha = 0.01, gamma = 0.9, temp1 = 1.00, temp2 = 1.00):
+    def __init__(self, width = 7, height = 6, alpha = 0.01, gamma = 0.9
+				, premio=1000):
 
         self.width = width
         self.height = height
+								
+        self.premio =premio
 
         self.tablero = np.zeros([height, width], dtype = np.int16)
         
@@ -19,8 +26,6 @@ class Tatetito(object):
         self.gamma = gamma
 
         # Temperaturas: 1.00 es temperatura infinita
-        self.temp1 = temp1
-        self.temp2 = temp2
         
         self.learning_step = 0
     
@@ -109,16 +114,22 @@ class Tatetito(object):
                 if self.tablero[r,c] == 0: res.append(c); break
         return res
 
-
-    # Actualiza sobre el tablero la accion realizada
-    def move(self, action, player):
-
+    def ultimaFilaLibre(self,action):
+        res = self.height
         for r in range(self.height):
             if self.tablero[r,action] == 0:
-                self.tablero[r,action] = player
-                break
-
-
+                res= r
+                break  
+        return res    
+    # Actualiza sobre el tablero la accion realizada
+    def move(self, action, player):
+        r = self.ultimaFilaLibre(action)
+        self.tablero[r,action] = player
+        
+    def revert(self, action):
+        r = self.ultimaFilaLibre(action)
+        self.tablero[r-1,action] = 0
+    
     # FALTA VER ESTA FUNCION, CREO QUE HAY QUE PASARLE PLAYER, 
     # Y QUE NO DE RECOMPENSA SI ES EMPATE!!!
     """ Funcion recompensa, tengo una reward positiva si desde state
@@ -127,24 +138,21 @@ class Tatetito(object):
         
         self.move(action, player)
         if self.isTerminal(action) == "4EnLinea":
-            res = 100
+            res = self.premio
         else:
             res = 0
         # "Desmueve"
-        for r in range(self.height):
-            if self.tablero[r,action] == 0:
-                r = r-1
-                break    
-        self.tablero[r,action] = 0
+        self.revert(action)
         return res
     
         
-    def learn(self, steps = np.inf):
+    def learn(self, steps = np.inf, temp1=0, temp2=0):
 
         # Inicializo
         player = 1
         action_best = np.random.randint(self.width)
         step = 0
+        self.tablero = np.zeros([self.height, self.width], dtype = np.int16)
         # Repito hasta que state sea terminal
         # VER ACA, QUE ES LO QUE LE PASAMOS COMO STATE!!!!!
         while self.isTerminal(action_best) == "Falso" and step < steps:
@@ -152,45 +160,51 @@ class Tatetito(object):
             self.learning_step += 1
             step += 1
             state = self.aString()
-
             # 1) Listo las posibles acciones que puedo hacer teniendo
                 # en cuenta el estado de donde estoy, cargado en la matriz
             actions = self.accionesPosibles()
-
             # LO MAS IMPORTANTE A CAMBIAR ESTA AQUI
             # 2) Elijo la accion con a con algun criterio, en principio al azar
-	       # Aca discriminamos que jugador juega con temperatura alta o baja
+            # Aca discriminamos que jugador juega con temperatura alta o baja
             if player == 1:
-                temp = self.temp1
+                temp = temp1
+                otro = 2
             else:
-                temp = self.temp2
-
+                otro = 1
+                temp = temp2
             if random.random() < temp:
                 action_best = random.choice(actions)
             else:
+                for a in actions:
+                    #a=0
+                    r = self.ultimaFilaLibre(a)
+                    self.move(a,player)
+                    for b in self.accionesPosibles():
+                        #b=3
+                        s = self.ultimaFilaLibre(b) 
+                        self.move(b,otro)
+                        if self.cuatroEnLinea(s,b):
+                            self.Q[state][a]=-self.premio
+                        self.revert(b)
+                    if self.cuatroEnLinea(r,a):
+                        self.Q[state][a]=self.premio*2
+                    self.revert(a)
+                    #self.draw()
                 actions_Q = [[action, self.Q[state][action]] for action in actions]
-                action_best = max(actions_Q, key = lambda x: x[1])[0]    
-            
+                action_best = max(actions_Q, key = lambda x: x[1])[0]                
             recompensa = self.reward(action_best, player)
             # 3) Calculo el nuevo valor de Q(s,a)
             # OJO: aca ya cambia el tablero
             self.move(action_best, player)
-
-
-
-
+            #self.draw()
             new_state = self.aString()
-            
             new_actions = self.accionesPosibles()
-
             try:
                 new_actions_Q = [[action, self.Q[new_state][action]] for action in new_actions]                
                 new_action_best = max(new_actions_Q, key = lambda x: x[1])[0]          
-
                 # Aca hay que revisar conceptualmente si el - de gamma esta bien
                 self.Q[state][action_best] += self.alpha*(recompensa - self.gamma * (
                     self.Q[new_state][new_action_best] - self.Q[state][action_best]))
-    
                 # Cambia el jugador
                 if player == 1: player = 2
                 else: player = 1
@@ -199,7 +213,7 @@ class Tatetito(object):
             
         #pylab.figure()
         #self.draw()
-        
+
         
     def draw(self):        
         color_dict = {0: 'white', 1: 'red', 2: 'green'}
@@ -210,14 +224,10 @@ class Tatetito(object):
         pylab.xlim([-0.5, self.width-1 + 0.5])
         pylab.ylim([-0.5, self.height-1 + 0.5])
 
-#random.seed(123459)
-seba_pinto = Tatetito()
-for _ in range(10000):
-    seba_pinto.learn()
 
-# Guardo el objeto entero
-dill.dump(seba_pinto, file('Modelo_entrenado.pk','w'))
-# Se carga con dill.load(file('Modelo_entrenado'))
+
+
+
 
 
 
